@@ -4,6 +4,10 @@
   "description": "iron hack form project",
   "main": "server.js",
   "scripts": {
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +19,14 @@
   "bugs": {
     "url": "https://github.com/hisamparker/complaint-app/issues"
   },
-  "homepage": "https://github.com/hisamparker/complaint-app#readme"
+  "homepage": "https://github.com/hisamparker/complaint-app#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
+    "concurrently": "^6.2.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.3",
+    "nodemon": "^2.0.12"
+  }
 }
