@@ -1,0 +1,2 @@
+const tickets = [{priority:2,complaint:"life the universe and everything",title:"i have problems"},{priority:3,complaint:"asdfasf",title:"asdfasf"},{priority:3,complaint:"asdfasf",title:"asdfasf"},{priority:2,complaint:"asfsadf",title:"adfsaf"},{priority:1,complaint:"do i do i do?",title:"why "},{priority:3,complaint:"bitch eating crackers",title:"party"},{priority:3,complaint:"I want a coke.",title:"my ticket"},{priority:1,complaint:"wtf, why didn't i proxy before",title:"my proxy is proxy"}]
+export default tickets
