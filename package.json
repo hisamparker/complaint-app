@@ -1,0 +1,19 @@
+{
+  "name": "complain-app",
+  "version": "1.0.0",
+  "description": "iron hack form project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hisamparker/complaint-app.git"
+  },
+  "author": "hisam",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/hisamparker/complaint-app/issues"
+  },
+  "homepage": "https://github.com/hisamparker/complaint-app#readme"
+}
