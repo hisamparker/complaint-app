@@ -6,15 +6,15 @@ import User from '../models/userModel.js'
 // @ACCESS ?
 const addNewTicket = async( req, res ) => {
     try {
-        const { userName, title, priority, complaint  } = req.body
-        const user = await User.findOne({ userName })
+        const { user , title, priority, complaint  } = req.body.form
+        console.log(req.body);
         const newTicket = new Ticket({
-            user: user._id,
+            user: user,
             title,
             priority,
             complaint
         })
-        const savedTicket = await ticket.save()
+        const savedTicket = await newTicket.save()
         
         res.status(201).json(savedTicket)
     } catch (err) {

@@ -1,5 +1,6 @@
 {
   "name": "complain-app",
+  "proxy": "http://localhost:8080",
   "version": "1.0.0",
   "description": "iron hack form project",
   "main": "server.js",
@@ -22,7 +23,6 @@
   },
   "homepage": "https://github.com/hisamparker/complaint-app#readme",
   "dependencies": {
-    "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "concurrently": "^6.2.0",
     "dotenv": "^10.0.0",
