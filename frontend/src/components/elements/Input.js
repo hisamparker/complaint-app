@@ -37,10 +37,11 @@ const StyledInput = styled.input`
 //   display: block;
 // `;
 
-const Input = ({ className, type, name, placeholder, onChange, required, disabled, index }) => {
+const Input = ({ label, className, type, name, placeholder, onChange, required, disabled, index }) => {
 
   return (
     <StyledLabel className={className}>
+    {label && label}
       <StyledInput
         required={required && "required"}
         disabled={disabled && "disabled"}
