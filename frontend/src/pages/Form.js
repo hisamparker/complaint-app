@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { AxiosInstance } from '../utils/Helpers'
+import AuthContext from "../context/AuthContext";
 import Button from '../components/elements/Button';
 import CheckInput from '../components/elements/CheckInput';
 import Complaint from '../components/elements/Complaint';
@@ -10,7 +11,7 @@ import RadioInput from '../components/elements/RadioInput';
 import Title from '../components/layout/Title';
 
 const Form = (
-  { setSaving, setError, saving, setErrorMessage, setSuccess }
+  { setSaving, setError, saving, setErrorMessage, setSuccess, setSuccessMessage }
 ) => {
   const priority = [3, 2, 1];
   const [users, setUsers] = useState([]);
@@ -21,6 +22,8 @@ const Form = (
     complaint: "",
     title: "",
   });
+  const { user } = useContext(AuthContext)
+  console.log(user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +59,7 @@ const Form = (
     .catch( error => console.log(error) )
       setSaving(false);
       setSuccess(true);
+      setSuccessMessage('Successfully saved')
       return () => clearTimeout(timer);
     });
   };
@@ -78,7 +82,7 @@ const Form = (
     <>
       
         <Title>
-          <h1>Contact Us</h1>
+          <h1>Hey {user._id && user.userName} what's up?</h1>
         </Title>
   
         <form onSubmit={onSubmitForm} style={

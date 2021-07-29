@@ -1,5 +1,5 @@
 import React, { useState, useContext, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { AxiosInstance } from '../utils/Helpers'
 import AuthContext from "../context/AuthContext";
 import Button from '../components/elements/Button';
@@ -7,13 +7,13 @@ import Input from '../components/elements/Input';
 import styled from "styled-components";
 
 
-const Login = (props) => {
+const Login = ({setError, setErrorMessage, setSuccess, setSuccessMessage}) => {
   const [credentials, setCredentials] = useState({});
   const { setLoggedIn } = useContext(AuthContext)
   let history = useHistory();
-  // console.log(history.goBack());
-  // let location = useLocation();
-  // let { from } = location.state || { from: { pathname: "/" } };
+  let location = useLocation();
+
+  let { from } = location.state || { from: { pathname: "/" } };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const onLoginUser = useCallback(async(event) => {
@@ -23,16 +23,19 @@ const Login = (props) => {
         email: credentials.email,
         password: credentials.password
       }
-      const { status } = await AxiosInstance.post(
+      const { status, data } = await AxiosInstance.post(
         'users/login',
         loggedInUserData
       )
       if(status === 200){
         setLoggedIn(true)
-        history.push("/dashboard");
-      }
+        setSuccess(true)
+        setSuccessMessage(`Welcome back ${data.userName}`)
+        history.replace(from);
+      } 
     } catch (err) {
-      console.log(err);
+      setError(true)
+      setErrorMessage(err.message)
     }
   });
 

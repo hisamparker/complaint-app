@@ -94,6 +94,7 @@ const logginUser = async (req, res) => {
       res.json({
         _id: user._id,
         name: user.name,
+        userName: user.userName,
         email: user.email,
         // if the password matches we return a token that has an id with the value of the user's id! so cool! 
         // go to https://jwt.io/ and put the token into their debugger then you can see what it contains here
@@ -122,7 +123,7 @@ const logoutUser = async( req, res) => {
       secure: true,
       sameSite: "none",
       MaxAge: 36000
-    }).status(200).send(`Successfully logged out!`)
+    }).status(200).send()
 }
 
 // @desc    Get if user is logged in or not

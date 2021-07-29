@@ -23,13 +23,16 @@ const StyledNav = styled.nav`
   }
 `;
 
-const NavBar = ({ onChange, theme, className, children }) => {
-  const { loggedIn, setLoggedIn } = useContext(AuthContext)
+const NavBar = ({ onChange, theme, className, setError, setErrorMessage, setSuccess, setSuccessMessage }) => {
+  const { loggedIn, setLoggedIn, setUser } = useContext(AuthContext)
 
   const logUserOut = async() => {
     const { status } = await AxiosInstance.post('users/logout')
     if(status === 200){
         setLoggedIn(false)
+        setSuccess(true)
+        setUser({})
+        setSuccessMessage('See ya!')
     }
   }
 

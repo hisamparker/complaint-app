@@ -1,26 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AxiosInstance } from '../utils/Helpers'
 import styled from "styled-components";
 import Button from '../components/elements/Button';
 import Input from '../components/elements/Input';
+import AuthContext from "../context/AuthContext";
+import { useHistory, useLocation } from "react-router-dom";
 
-
-const Register = () => {
+const Register = ({setError, setErrorMessage, setSuccess, setSuccessMessage}) => {
   const [credentials, setCredentials] = useState({});
-  // let history = useHistory();
-  // const { setUser } = useContext(UserContext);
-  // const [error, setError] = useState(null);
+  const { setLoggedIn } = useContext(AuthContext)
+  let history = useHistory();
+  let location = useLocation();
 
-  // //set user in context and push them home
-  // const setUserContext = async () => {
-  //   try {
-  //     const {data} = await AxiosInstance('/users/login')
-  //     setUser(data.user);
-  //     history.push('/');
-  //   } catch (err) {
-  //     setError(err.response.data);
-  //   }
-  //  }
+  let { from } = location.state || { from: { pathname: "/" } };
 
   const onRegisterUser = async(event) => {
     event.preventDefault();
@@ -32,12 +24,19 @@ const Register = () => {
         password: credentials.password,
         passwordVerify: credentials.passwordVerify
       }
-      await AxiosInstance.post(
+      const { status, data } = await AxiosInstance.post(
         'users',
           registeredUserData
       )
+      if(status === 201){
+        setLoggedIn(true)
+        setSuccess(true)
+        setSuccessMessage(`Welcome to hate day ${data.userName}`)
+        history.replace(from);
+      }
     } catch (err) {
-      console.log(err);
+      setError(true)
+      setErrorMessage(err.message)
     }
   }
 

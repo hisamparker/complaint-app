@@ -5,11 +5,13 @@ const AuthContext = createContext()
 
 const AuthContextProvider = ({children}) => {
     const [loggedIn, setLoggedIn] = useState(undefined);
+    const [user, setUser] = useState({})
 
     const getLoggedIn = async() => {
         const { data } = await AxiosInstance( 'users/login')
         if(data._id) {
             setLoggedIn(true)
+            setUser(data)
         } else {
             setLoggedIn(false)
         }
@@ -22,7 +24,7 @@ const AuthContextProvider = ({children}) => {
     }, [setLoggedIn, loggedIn])
 
     return (
-        <AuthContext.Provider value={ { loggedIn, getLoggedIn, setLoggedIn } }>
+        <AuthContext.Provider value={ { user, loggedIn, getLoggedIn, setLoggedIn } }>
             {children}
         </AuthContext.Provider>
     )

@@ -19,6 +19,7 @@ import PrivateRoute from "./components/layout/PrivateRoute";
 function App() {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [saving, setSaving] = useState(false);
   const [tickets, setTickets] = useState([]);
@@ -72,7 +73,12 @@ function App() {
       <ThemeProvider theme={themeMode}>
         <GlobalStyles />
         <Header theme={theme}> 
-        <NavBar theme={theme} onChange={toggleTheme} />
+        <NavBar theme={theme} 
+          onChange={toggleTheme} 
+          setError={setError}
+          setErrorMessage={setErrorMessage}
+          setSuccess={setSuccess}
+          setSuccessMessage={setSuccessMessage} />
         </Header>
         <main style={{ minHeight: "85vh" }}>
           <Switch>
@@ -80,11 +86,19 @@ function App() {
               <Dashboard setTickets={setTickets} tickets={tickets} />
             </PrivateRoute>
             <Route path="/register">
-              <Register/>
+              <Register 
+                setSuccessMessage={setSuccessMessage}
+                setSaving={setSaving}
+                setError={setError}
+                setErrorMessage={setErrorMessage}
+                setSuccess={setSuccess}/>
             </Route>
-            <Route path="/login" render={(props) => <Login {...props}/>}/>
-              {/* <Login/>
-            </Route> */}
+            <Route path="/login" render={(props) => <Login 
+                setSaving={setSaving}
+                setSuccessMessage={setSuccessMessage}
+                setError={setError}
+                setErrorMessage={setErrorMessage}
+                setSuccess={setSuccess} {...props}/>}/>
             <Route path="/form">
               <Form
                 saving={saving}
@@ -93,6 +107,7 @@ function App() {
                 setError={setError}
                 setErrorMessage={setErrorMessage}
                 setSuccess={setSuccess}
+                setSuccessMessage={setSuccessMessage}
                 setTickets={setTickets}
               ></Form>
             </Route>
@@ -108,7 +123,7 @@ function App() {
             <Toast dismissOnClick={error && handleDismiss}
               classNameP={success ? "success" : error ? "error" : "hidden"}
             >
-              {success ? "Successfully saved" : errorMessage}
+              {success ? successMessage : errorMessage}
             </Toast>
           {/* ) : null} */}
         </main>
