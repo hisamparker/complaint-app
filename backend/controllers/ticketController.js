@@ -48,6 +48,7 @@ const getTicketById = async( req, res ) => {
 // @ROUTE GET /api/tickets
 // @ACCESS Private
 const getTickets = async( req, res ) => {
+    // get all the tickets and populate the user field as well so we get the name and email of the user who made the request
     const tickets = await Ticket.find({ }).populate('user', 'name email')
     res.json(tickets)
 }

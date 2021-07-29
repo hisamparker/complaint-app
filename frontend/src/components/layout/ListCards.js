@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import Card from './Card';
 
 
@@ -7,7 +8,7 @@ const ListCards = ({tickets}) => {
     return a.priority - b.priority;
   });
     return (
-      <>
+      <StyledSection>
         <Card index="example" priority="1">
           <p>Example</p>
           <p>What is time?</p>
@@ -24,8 +25,15 @@ const ListCards = ({tickets}) => {
                 </Link>
             );
           })}
-      </>
+      </StyledSection>
     );
 }
+
+const StyledSection = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 70vw;
+  margin: 0 auto;
+`;
  
 export default ListCards;

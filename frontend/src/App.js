@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from "./theme/GlobalStyles";
 import { Switch, Route } from "react-router-dom";
@@ -11,6 +11,10 @@ import NotFound from "./pages/404";
 import Dashboard from "./pages/Dashboard";
 import Toast from "./components/layout/Toast";
 import Form from "./pages/Form";
+import Register from "./pages/Register";
+import Login from './pages/Login';
+import { AuthContextProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/layout/PrivateRoute";
 
 function App() {
   const [error, setError] = useState(false);
@@ -64,49 +68,55 @@ function App() {
 };
 
   return (
-    <Fragment>
+    <AuthContextProvider>
       <ThemeProvider theme={themeMode}>
         <GlobalStyles />
         <Header theme={theme}> 
         <NavBar theme={theme} onChange={toggleTheme} />
         </Header>
         <main style={{ minHeight: "85vh" }}>
-        <Switch>
-            <Route path="/dashboard">
-                <Dashboard setTickets={setTickets} tickets={tickets} />
-              </Route>
-              <Route path="/form">
-                <Form
-                  saving={saving}
-                  tickets={tickets}
-                  setSaving={setSaving}
-                  setError={setError}
-                  setErrorMessage={setErrorMessage}
-                  setSuccess={setSuccess}
-                  setTickets={setTickets}
-                ></Form>
-              </Route>
-              <Route exact path="/">
-                <Landing />
-              </Route>
-              <Route path="*">
-                <NotFound />
-              </Route>
-            </Switch>
-            {saving && <p>saving...</p>}
-            {/* {error === true || success === true ? ( */}
-              <Toast dismissOnClick={error && handleDismiss}
-                classNameP={success ? "success" : error ? "error" : "hidden"}
-              >
-                {success ? "Successfully saved" : errorMessage}
-              </Toast>
-            {/* ) : null} */}
+          <Switch>
+            <PrivateRoute path="/dashboard">
+              <Dashboard setTickets={setTickets} tickets={tickets} />
+            </PrivateRoute>
+            <Route path="/register">
+              <Register/>
+            </Route>
+            <Route path="/login" render={(props) => <Login {...props}/>}/>
+              {/* <Login/>
+            </Route> */}
+            <Route path="/form">
+              <Form
+                saving={saving}
+                tickets={tickets}
+                setSaving={setSaving}
+                setError={setError}
+                setErrorMessage={setErrorMessage}
+                setSuccess={setSuccess}
+                setTickets={setTickets}
+              ></Form>
+            </Route>
+            <Route exact path="/">
+              <Landing />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+          {saving && <p>saving...</p>}
+          {/* {error === true || success === true ? ( */}
+            <Toast dismissOnClick={error && handleDismiss}
+              classNameP={success ? "success" : error ? "error" : "hidden"}
+            >
+              {success ? "Successfully saved" : errorMessage}
+            </Toast>
+          {/* ) : null} */}
         </main>
         <Footer>
         &copy; WEB DEV 0321 | Iron Hack
         </Footer>
       </ThemeProvider>
-    </Fragment>
+    </AuthContextProvider>
   );
 }
 
