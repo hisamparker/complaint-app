@@ -61,7 +61,7 @@ const CheckInput = ({
   type = "checkbox",
   name,
   onChange,
-  checked,
+  checked = null,
   theme,
   children,
 }) => {

@@ -23,7 +23,6 @@ const Form = (
     title: "",
   });
   const { user } = useContext(AuthContext)
-  console.log(user);
 
   useEffect(() => {
     const fetchData = async () => {

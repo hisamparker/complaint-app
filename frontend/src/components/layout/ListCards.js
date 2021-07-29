@@ -14,9 +14,9 @@ const ListCards = ({tickets}) => {
           <p>What is time?</p>
         </Card>
         {sortedTickets.length > 0 &&
-          sortedTickets.map((ticket) => {
+          sortedTickets.map((ticket, idx) => {
             return (
-                <Link to={`tickets/${ticket._id}`}>
+                <Link key={ticket._id + idx} to={`tickets/${ticket._id}`}>
                     <Card key={ticket._id} priority={ticket.priority}>
                         <p>{ticket.user.name}</p>
                         <p>{ticket.complaint}</p>

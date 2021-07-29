@@ -17,6 +17,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import PrivateRoute from "./components/layout/PrivateRoute";
 
 function App() {
+  // move all the error and saving stuff into context
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");

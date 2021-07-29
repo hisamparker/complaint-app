@@ -40,7 +40,7 @@ const NavBar = ({ onChange, theme, className, setError, setErrorMessage, setSucc
     <StyledNav className={className}>
       <div>
         <NavLink to="/">Home</NavLink>
-        <CheckInput theme={theme} onChange={onChange} />
+        <CheckInput checked={null} theme={theme} onChange={onChange} />
       </div>
       <div>
         <NavLink to="/form">Complain</NavLink>
